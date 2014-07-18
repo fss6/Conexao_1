@@ -8,6 +8,7 @@ import java.io.InputStream;
 
 import com.parser.Exp1Parser;
 import com.parser.ParseException;
+import com.util.Print;
 
 public class Exemplos {
 
@@ -24,7 +25,7 @@ public class Exemplos {
 	if (prg.checaTipo()) {
 		prg.executar();
 	} else {
-		System.out.println("erro encontrado!");
+		Print.texto("erro encontrado!");
 	}
  }
 }
