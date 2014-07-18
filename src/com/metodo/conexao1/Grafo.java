@@ -20,7 +20,7 @@ public class Grafo{
 		this.vertices = new HashMap<>();
 	}
 	
-	public ArrayList<Expressao> explorarGrafo(Expressao startVertice, ArrayList<Expressao> path) 
+	public void explorarGrafo(Expressao startVertice, ArrayList<Expressao> path) 
 			throws ParSemComplementarException{
 		
 		if(path == null)
@@ -48,8 +48,6 @@ public class Grafo{
 		}
 		
 		path.remove(path.size()-1);
-		
-		return path;
 		
 	}
 	
