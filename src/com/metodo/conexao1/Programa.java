@@ -13,9 +13,6 @@ public class Programa{
 
 	public Expressao executar() {
 		
-		//Resolucao1 r = new Resolucao1(expressao);
-		//r.executar();
-		
 		Conexao1 c = new Conexao1(expressao);
 		c.executar();
 		

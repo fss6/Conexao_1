@@ -66,13 +66,22 @@ public class ExpAnd extends ExpBinaria{
 	@Override
 	public ArrayList<ArrayList<Expressao>> expressionToString() {
 		
+		ArrayList<Expressao> clausula = new ArrayList<>();
+		
+		ArrayList<ArrayList<Expressao>> result = getEsq().expressionToString();
+		
+		for (ArrayList<Expressao> e : result) {
+			clausula.addAll(e);
+		}
+		
+		result = getDir().expressionToString();
+		
+		for (ArrayList<Expressao> d : result) {
+			clausula.addAll(d);
+		}
+		
 		ArrayList<ArrayList<Expressao>> list = new ArrayList<>();
-		
-		ArrayList<ArrayList<Expressao>> esq = getEsq().expressionToString();
-		list.addAll(esq);
-		
-		ArrayList<ArrayList<Expressao>> dir = getDir().expressionToString();
-		list.addAll(dir);
+		list.add(clausula);
 		
 		return list;
 		

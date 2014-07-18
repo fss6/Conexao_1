@@ -9,11 +9,13 @@ public class Conexao1{
 	private Expressao expressao;
 	private ArrayList<Expressao> clausulas;
 	private ArrayList<ArrayList<Expressao>> conjunto;
+	private Grafo grafo;
 	
 	public Conexao1(Expressao expressao){
 		this.expressao = expressao;
 		this.clausulas = new ArrayList<>();
 		this.conjunto = new ArrayList<>();
+		this.grafo = new Grafo();
 	}
 
 	public void executar() {
@@ -21,37 +23,47 @@ public class Conexao1{
 		printExpressao("Expressao", expressao);
 		printExpressao("FND",expressao.avaliar(expressao));
 		separarClausulas(expressao);
-		/*
+		montarGrafo();
+		
+	}
+	
+	private void montarGrafo(){
+		
+		System.out.println("Montar Grafo...");
+		System.out.println();
+		
 		int i = 0;
 		int j = 0;
-		Expressao test = null;
+		int k = 0;
 		
-		while (i < conjunto.size()-1){
+		while( i < conjunto.size() - 1){
 			
-			j = 0;
+			while(j < conjunto.get(i).size()){
+				
+				Expressao vertice = conjunto.get(i).get(j);
+				this.grafo.addVertice(vertice);
 			
-			while (j < conjunto.get(i).size()){
-				
-				test = conjunto.get(i).get(j);
-				
-				//remove se o par complementar for encontrado
-				if(encontrarComplementar(conjunto.get(i).get(j), i + 1)){
+				while( k < conjunto.get(i+1).size()){
 					
-					conjunto.get(i).remove(j);
-					j = 0;
-					
-				}else{
-					j += 1;
+					Expressao vizinho = conjunto.get(i+1).get(k);
+					this.grafo.addVertice(vizinho);
+					this.grafo.addAresta(new Aresta(vertice, vizinho));
+					k += 1;
 				}
 				
-				printClausulas("Resolucao ( " + test + " )");
-				
-			}//end while
+				k = 0;
+				j += 1;
+			}
 			
-			i += 1;
-			
-		}//end while
-		*/
+			j = 0;
+			i += 1 ;
+		}
+		
+		
+		Expressao startVertice = conjunto.get(0).get(0);
+		System.out.println("Vertices: "+ this.grafo.getVertices());
+		System.out.println("Arestas: "+this.grafo.getArestas());
+		System.out.println("Path: " + this.grafo.explorarGrafo(startVertice, null));
 		
 	}
 	
@@ -115,10 +127,8 @@ public class Conexao1{
 		int index = 0;
 		
 		
-		
 		while( index < clausulas.size()){
 			
-			System.out.println("Cla: " + clausulas);
 			exp = this.clausulas.get(index);
 			
 			//Verifica se a expressao e instancia da classe ExpAnd

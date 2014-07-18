@@ -15,7 +15,7 @@ public class Exemplos {
 	  
 	Programa prg = null;
 	
-	File file = new File("/Users/fabiosantos/Documents/workspace/Resolucao_1/run.txt");
+	File file = new File("/Users/fabiosantos/Documents/workspace/Conexao_1/run.txt");
 	InputStream fis = new FileInputStream(file);
 		
 	new Exp1Parser(fis);
